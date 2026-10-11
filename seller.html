@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard | Handmade Haven</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .seller-wrap{max-width:760px;margin:45px auto;padding:0 18px 50px}.seller-panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:clamp(20px,4vw,36px);box-shadow:var(--shadow)}
+    .seller-panel h1{font-size:clamp(30px,5vw,42px)}.seller-form label{display:block;margin:16px 0 7px;font-size:13px;font-weight:700;color:var(--ink)}
+    .seller-form input,.seller-form textarea,.seller-form select{width:100%;padding:12px;border:1px solid #d9d4c9;border-radius:8px;font:inherit;background:white;color:#26372f}
+    .seller-form input[type=file]{padding:10px}.seller-form button{margin-top:18px}.seller-message{margin:14px 0;color:var(--green);overflow-wrap:anywhere}.seller-message.error{color:#b33b2e}
+    .seller-product{display:grid;grid-template-columns:85px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.seller-product img{width:85px;height:85px;object-fit:cover;border-radius:8px;background:#f3eadc}.seller-product h3{margin:0 0 5px;color:var(--ink);font-size:15px}.seller-product p{margin:0;color:var(--muted);font-size:13px}.delete-product{background:#fff;border:1px solid #d8b9b2;color:#9a3026;border-radius:30px;padding:9px 12px;cursor:pointer}
+    .seller-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}.seller-actions .button{margin-top:0}.seller-note{font-size:13px;line-height:1.7;color:var(--muted)}.back-home{display:inline-block;margin:18px 0;color:var(--green);font-weight:700}
+    @media(max-width:520px){.seller-product{grid-template-columns:65px 1fr}.seller-product img{width:65px;height:65px}.delete-product{grid-column:2;justify-self:start}.seller-wrap{margin-top:25px}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">❋</span><span><strong>Handmade Haven</strong><small>Crafted with love ♥</small></span></a>
+    <a class="header-contact" href="index.html">View shop ↗</a>
+  </header>
+  <main class="seller-wrap">
+    <div class="seller-panel">
+      <p class="eyebrow">SHOP MANAGEMENT</p>
+      <h1>Seller Dashboard</h1>
+      <section id="loginSection">
+        <p>Sign in with the seller account created for you by the website owner.</p>
+        <form id="loginForm" class="seller-form">
+          <label for="email">Seller email</label><input id="email" type="email" autocomplete="username" required>
+          <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required>
+          <button class="button button-dark" type="submit">Sign in</button>
+        </form>
+      </section>
+      <section id="dashboardSection" hidden>
+        <div class="seller-actions"><p id="signedInAs" class="seller-note"></p><button id="logoutButton" class="button button-dark" type="button">Log out</button></div>
+        <h2>Add a product</h2>
+        <form id="productForm" class="seller-form">
+          <label for="productName">Product name</label><input id="productName" maxlength="100" required placeholder="e.g. Handmade crochet bag">
+          <label for="productPrice">Price (₹)</label><input id="productPrice" type="number" min="1" max="10000000" step="0.01" required placeholder="499">
+          <label for="productCategory">Category</label>
+          <select id="productCategory"><option>Home Decor</option><option>Jewellery</option><option>Accessories</option><option>Gifts</option></select>
+          <label for="productDescription">Description</label><textarea id="productDescription" rows="3" maxlength="1000" placeholder="Tell customers about this product"></textarea>
+          <label for="productPhoto">Product photo (JPG, PNG or WebP, max 5 MB)</label><input id="productPhoto" type="file" accept="image/jpeg,image/png,image/webp" required>
+          <button class="button button-green" id="addProductButton" type="submit">Upload and publish product</button>
+        </form>
+        <h2 style="margin-top:38px">Products in your shop</h2><div id="sellerProducts"></div>
+      </section>
+      <p id="sellerMessage" class="seller-message" role="status" aria-live="polite"></p>
+      <p class="seller-note">Your product details and photos are stored online. Never share your seller password. The site owner must configure the database security rules before using this dashboard.</p>
+      <a class="back-home" href="index.html">← Back to shop</a>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="seller.js"></script>
+</body>
+</html>
