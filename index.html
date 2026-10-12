@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +67,7 @@
           <p class="eyebrow">A LITTLE SOMETHING SPECIAL</p>
           <h2>Shop handmade</h2>
         </div>
-        <p>Tap a product to see details and enquire by email.</p>
+        <p>Tap a product to see details and place your order.</p>
       </div>
 
       <div class="filters" id="filters" aria-label="Filter products">
@@ -102,17 +101,17 @@
           </div>
 
           <div class="order-step">
-            <div class="step-icon">📧</div>
+            <div class="step-icon">📝</div>
             <span class="step-number">০২</span>
-            <h3>ইমেইলে পণ্যের বিবরণ জানুন</h3>
-            <p>পণ্যের পাশে থাকা Enquire by Email বাটনে ক্লিক করুন। পণ্যের বিবরণসহ একটি ইমেইল তৈরি হবে।</p>
+            <h3>অর্ডার ফর্ম পূরণ করুন</h3>
+            <p>পণ্যে ক্লিক করলে একটি ফর্ম আসবে। সেখানে আপনার নাম, পরিমাণ, যোগাযোগের তথ্য ও ডেলিভারির ঠিকানা লিখুন।</p>
           </div>
 
           <div class="order-step">
-            <div class="step-icon">📝</div>
+            <div class="step-icon">📧</div>
             <span class="step-number">০৩</span>
-            <h3>প্রয়োজনীয় তথ্য জানান</h3>
-            <p>ইমেইলে আপনার নাম, পণ্যের পরিমাণ, যোগাযোগের তথ্য ও ডেলিভারির ঠিকানা জানান।</p>
+            <h3>Place Order চাপুন</h3>
+            <p>Place Order বাটনে ক্লিক করলেই আপনার অর্ডার সরাসরি আমাদের কাছে পৌঁছে যাবে।</p>
           </div>
 
           <div class="order-step">
@@ -283,7 +282,7 @@
           এবং সহজে অর্ডার করার অভিজ্ঞতাকে আমরা আনন্দদায়ক করে তুলতে চাই।
 
           আমাদের ওয়েবসাইটে আপনার পছন্দের পণ্যটি বেছে নিন এবং
-          ইমেইলের মাধ্যমে সহজেই পণ্য সম্পর্কে জানতে বা অর্ডারের বিষয়ে যোগাযোগ করুন।
+          ফর্ম পূরণ করে সহজেই অর্ডার করুন।
         </p>
 
         <p>
@@ -340,6 +339,47 @@
         <p id="modalDescription"></p>
         <p class="stock-note">✦ Handmade with care</p>
 
+        <!-- ===== ORDER FORM (FormSubmit) ===== -->
+        <form id="orderForm" class="order-form" action="https://formsubmit.app/f/yqrux4es5e" method="POST">
+          <h3 class="order-form-title">🛍️ অর্ডার করুন</h3>
+
+          <input type="hidden" name="product" id="orderProduct">
+          <input type="hidden" name="price" id="orderPrice">
+          <input type="hidden" name="_subject" id="orderSubject" value="New Order - হাতের ছোঁয়ায় সুতোর স্বপ্ন">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <!-- spam trap: must stay empty -->
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+          <label>আপনার নাম *
+            <input type="text" name="name" required placeholder="আপনার পুরো নাম">
+          </label>
+
+          <label>ফোন নম্বর *
+            <input type="tel" name="phone" required placeholder="01XXXXXXXXX">
+          </label>
+
+          <label>ইমেইল (ঐচ্ছিক)
+            <input type="email" name="email" placeholder="example@gmail.com">
+          </label>
+
+          <label>পরিমাণ *
+            <input type="number" name="quantity" min="1" value="1" required>
+          </label>
+
+          <label>ডেলিভারির ঠিকানা *
+            <textarea name="address" rows="3" required placeholder="গ্রাম/মহল্লা, থানা, জেলা, পিন কোড"></textarea>
+          </label>
+
+          <label>অতিরিক্ত কিছু জানাতে চাইলে
+            <textarea name="note" rows="2" placeholder="রঙ, সাইজ বা বিশেষ অনুরোধ"></textarea>
+          </label>
+
+          <button type="submit" class="button button-green full-button" id="orderSubmit">Place Order →</button>
+          <p class="order-msg" id="orderMsg" role="status"></p>
+        </form>
+        <!-- ===== /ORDER FORM ===== -->
+
         <a class="button button-green full-button" id="modalWhatsApp" href="#">
           Enquire by Email ↗
         </a>
@@ -349,9 +389,145 @@
     </section>
   </div>
 
+  <style>
+    .order-form {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 14px;
+      padding: 18px;
+      background: #fff8f3;
+      border: 1px solid #f0dfd6;
+      border-radius: 16px;
+    }
+
+    .order-form-title {
+      margin: 0 0 4px;
+      color: #653f3c;
+      font-size: 18px;
+    }
+
+    .order-form label {
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+      color: #79645d;
+    }
+
+    .order-form input,
+    .order-form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 11px 12px;
+      border: 1px solid #ead8ce;
+      border-radius: 10px;
+      background: #fff;
+      color: #49352f;
+      font: inherit;
+    }
+
+    .order-form input:focus,
+    .order-form textarea:focus {
+      outline: 2px solid #e3b7bb;
+      border-color: #a75d66;
+    }
+
+    .order-form button[disabled] {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .order-msg {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .order-msg.ok { color: #2f7d4f; }
+    .order-msg.err { color: #b3261e; }
+
+    .product-modal { max-height: 92vh; overflow-y: auto; }
+    /* Product image: fixed square ratio, stays visible while the form scrolls */
+.product-modal #modalImage {
+  align-self: start;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: auto;
+  max-height: 92vh;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Mobile: image on top, normal flow */
+@media (max-width: 760px) {
+  .product-modal #modalImage {
+    position: static;
+    max-height: 320px;
+    aspect-ratio: 4 / 3;
+  }
+}
+  </style>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
   <script src="script.js"></script>
+
+  <script>
+    // Order form -> FormSubmit (works with the original script.js)
+    (function () {
+      var form = document.getElementById("orderForm");
+      if (!form) return;
+
+      var msg = document.getElementById("orderMsg");
+      var btn = document.getElementById("orderSubmit");
+
+      // When another product is opened, clear the old form and message
+      new MutationObserver(function () {
+        form.reset();
+        msg.textContent = "";
+        msg.className = "order-msg";
+        btn.disabled = false;
+        btn.textContent = "Place Order →";
+      }).observe(document.getElementById("modalTitle"), { childList: true, characterData: true, subtree: true });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        var title = (document.getElementById("modalTitle").textContent || "").trim();
+        var price = (document.getElementById("modalPrice").textContent || "").trim();
+
+        document.getElementById("orderProduct").value = title;
+        document.getElementById("orderPrice").value = price;
+        document.getElementById("orderSubject").value = "New Order: " + title;
+
+        btn.disabled = true;
+        btn.textContent = "পাঠানো হচ্ছে...";
+        msg.textContent = "";
+        msg.className = "order-msg";
+
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("Request failed");
+            msg.textContent = "✅ আপনার অর্ডার পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব। ধন্যবাদ ❤️";
+            msg.className = "order-msg ok";
+            form.reset();
+          })
+          .catch(function () {
+            msg.textContent = "❌ অর্ডার পাঠানো যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন বা নিচের Email বাটন ব্যবহার করুন।";
+            msg.className = "order-msg err";
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = "Place Order →";
+          });
+      });
+    })();
+  </script>
 
 </body>
 </html>
