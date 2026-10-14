@@ -6,7 +6,7 @@
   Existing design and Supabase product loading are preserved.
 */
 
-const SELLER_EMAIL = "rollaiml@gmail.com";
+const SELLER_EMAIL = "haterchoyasutarsapna@gmail.com";
 
 const sampleProducts = [
   {
